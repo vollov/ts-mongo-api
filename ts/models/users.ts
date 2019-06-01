@@ -6,14 +6,14 @@ const cfg = new Config();
 
 export interface IUser extends Document {
   username: string;
-  hash: string;
-  salt: string;
+  email: string;
+  roles: [string];
 }
 
 const UserSchema: Schema = new Schema({
   username: { type: String, lowercase: true, unique: true },
-  hash: String,
-  salt: String
+  email: String,
+  roles: [{ type: Schema.Types.ObjectId, ref: "Role" }]
 });
 
 UserSchema.methods.generateJWT = function(): string {

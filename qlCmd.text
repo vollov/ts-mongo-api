@@ -1,0 +1,49 @@
+
+
+mutation{
+  addAdmin(input:{
+    name: "admin"
+    parentName: ""
+  }){
+    name
+    reportTo
+  }
+}
+
+mutation {
+  createRole(input: {
+    name: "manager"
+    parentName: "admin"
+	}){
+		name
+    reportTo
+	}
+}
+
+mutation {
+  createRole(input: {
+    name: "driver"
+    parentName: "manager"
+	}){
+		name
+    reportTo
+	}
+}
+
+{
+  user(id: "5ce860b8ef525939cf2cbf69") {
+    id
+    username
+    email
+    roles {
+      name
+    }
+  }
+}
+
+{
+  getChildren(name: "manager") {
+    id
+    name
+  }
+}

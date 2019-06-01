@@ -7,8 +7,9 @@
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
-    "start": "node ./dist/boot.js",
-    "test": "jest --detectOpenHandles "
+    "start": "node --inspect=5858 -r ts-node/register ./ts/boot.ts",
+    "start:watch": "nodemon",
+    "test": "jest --detectOpenHandles --watch"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +24,8 @@
     "ioredis": "^4.9.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.9",
+    "nodemon": "^1.19.0",
+    "ts-node": "^8.1.1",
     "uuidv4": "^4.0.0"
   },
   "devDependencies": {
@@ -41,5 +44,18 @@
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "ts"
+    ],
+    "exec": "npm start",
+    "ext": "ts"
   }
 }
